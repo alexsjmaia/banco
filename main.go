@@ -1,35 +1,22 @@
 package main
 
-import "fmt"
+import (
+	"banco/contas"
+	"fmt"
+)
 
-type ContaCorrente struct {
-	titular       string
-	numeroAgencia int
-	numeroConta   int
-	saldo         float64
+func PagarBoleto(conta verificarConta, valorDoBoleto float64) {
+	conta.Sacar(valorDoBoleto)
 }
 
-func (c *ContaCorrente) Sacar(valorDoSaque float64) string {
-	podeSacar := valorDoSaque > 0 && valorDoSaque <= c.saldo
-
-	if podeSacar {
-		c.saldo -= valorDoSaque
-		return "Saque relizado com sucesso"
-	} else {
-		return "Saldo insuficiente"
-	}
+type verificarConta interface {
+	Sacar(valor float64) string
 }
 
 func main() {
-	contaDaSilvia := ContaCorrente{}
-	contaDaSilvia.titular = "Silvia"
-	contaDaSilvia.saldo = 500
+	contaDoDenis := contas.ContaPoupanca{}
+	contaDoDenis.Depositar(100)
+	PagarBoleto(&contaDoDenis, 60)
 
-	fmt.Printf("%.2f\n", contaDaSilvia.saldo)
-
-	valorDoSaque := 499.99
-	fmt.Println(contaDaSilvia.Sacar(float64(valorDoSaque)))
-
-	fmt.Printf("Saldo Atual R$ %.2f\n", contaDaSilvia.saldo)
-
+	fmt.Println(contaDoDenis.ObterSaldo())
 }
