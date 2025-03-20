@@ -19,4 +19,10 @@ func main() {
 	PagarBoleto(&contaDoDenis, 60)
 
 	fmt.Println(contaDoDenis.ObterSaldo())
+
+	contaDaLuiza := contas.ContaCorrente{}
+	contaDaLuiza.Depositar(500)
+	PagarBoleto(&contaDaLuiza, -1000)
+
+	fmt.Println(contaDaLuiza.ObterSaldo())
 }
