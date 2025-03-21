@@ -14,6 +14,8 @@ type verificarConta interface {
 }
 
 func main() {
+	fmt.Println("Banco")
+
 	contaDoDenis := contas.ContaPoupanca{}
 	contaDoDenis.Depositar(100)
 	PagarBoleto(&contaDoDenis, 60)
